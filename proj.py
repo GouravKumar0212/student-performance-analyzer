@@ -1,30 +1,10 @@
 import pandas as pd
 import matplotlib.pyplot as plt
-
-# ================================
-# Read CSV File
-# ================================
-
 data = pd.read_csv("sample.csv")
 
-# ================================
-# Calculate Average
-# ================================
-
-data["Average"] = (
-    data["Math"] +
-    data["Science"] +
-    data["English"]
-) / 3
-
-# ================================
-# Grade System
-# ================================
-
+data["Average"] = (data["Math"] + data["Science"] + data["English"]) / 3
 grades = []
-
 for avg in data["Average"]:
-
     if avg >= 90:
         grades.append("A+")
 
@@ -41,41 +21,20 @@ for avg in data["Average"]:
         grades.append("Fail")
 
 data["Grade"] = grades
-
-# ================================
-# Find Overall Topper
-# ================================
-
 topper = data.loc[data["Average"].idxmax()]
-
-# ================================
-# Subject Wise Toppers
-# ================================
 
 math_topper = data.loc[data["Math"].idxmax()]
 science_topper = data.loc[data["Science"].idxmax()]
 english_topper = data.loc[data["English"].idxmax()]
 
-# ================================
-# Display Full Report
-# ================================
-
 print("\n========== STUDENT PERFORMANCE REPORT ==========\n")
 
 print(data)
-
-# ================================
-# Overall Topper
-# ================================
 
 print("\n========== OVERALL TOPPER ==========\n")
 
 print(f"Name : {topper['Name']}")
 print(f"Average Marks : {topper['Average']:.2f}")
-
-# ================================
-# Subject Wise Toppers
-# ================================
 
 print("\n========== SUBJECT WISE TOPPERS ==========\n")
 
@@ -84,11 +43,6 @@ print(f"Math Topper : {math_topper['Name']} ({math_topper['Math']})")
 print(f"Science Topper : {science_topper['Name']} ({science_topper['Science']})")
 
 print(f"English Topper : {english_topper['Name']} ({english_topper['English']})")
-
-# ================================
-# Pass / Fail Status
-# ================================
-
 print("\n========== RESULT STATUS ==========\n")
 
 for index, row in data.iterrows():
@@ -100,17 +54,9 @@ for index, row in data.iterrows():
 
     print(f"{row['Name']} --> {status}")
 
-# ================================
-# Save Final CSV Report
-# ================================
-
 data.to_csv("final_report.csv", index=False)
 
 print("\nFinal report saved as final_report.csv")
-
-# ================================
-# Bar Graph Visualization
-# ================================
 
 plt.figure(figsize=(8,5))
 
@@ -128,10 +74,6 @@ plt.savefig("performance_graph.png")
 plt.show()
 
 print("\nBar graph saved as performance_graph.png")
-
-# ================================
-# Pie Chart Visualization
-# ================================
 
 grade_counts = data["Grade"].value_counts()
 
